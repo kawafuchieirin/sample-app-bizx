@@ -1,0 +1,30 @@
+name: 機能提案・改善
+description: 追加したい機能や改善アイデアを提案する
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        アイデア歓迎です！ざっくりでも大丈夫です。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 解決したいこと / やりたいこと
+      description: どんな場面で、何ができると嬉しいですか？
+      placeholder: 例) タスクにラベルを付けて、あとで絞り込みたい。
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: 実現案（あれば）
+      description: 思いつく範囲でOK。無ければ空で構いません。
+    validations:
+      required: false
+  - type: checkboxes
+    id: help
+    attributes:
+      label: 参加意欲
+      options:
+        - label: 自分で実装してみたい（good first issue になり得ます）
+          required: false

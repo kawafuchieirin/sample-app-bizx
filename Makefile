@@ -20,7 +20,20 @@ help: ## このヘルプを表示
 
 # ---------------------------------------------------------------- セットアップ
 
-.PHONY: setup install install-backend install-frontend
+.PHONY: doctor setup install install-backend install-frontend
+doctor: ## 必要ツールが揃っているか確認(初回はまずこれ)
+	@echo "必須ツール:"
+	@for t in mise uv pnpm node; do \
+		if command -v $$t >/dev/null 2>&1; then printf "  \033[32m✓\033[0m %s\n" "$$t"; \
+		else printf "  \033[31m✗ %s が見つかりません\033[0m\n" "$$t"; fi; \
+	done
+	@echo "デプロイ用(任意):"
+	@for t in terraform docker gh aws; do \
+		if command -v $$t >/dev/null 2>&1; then printf "  \033[32m✓\033[0m %s\n" "$$t"; \
+		else printf "  \033[33m-\033[0m %s (未導入)\n" "$$t"; fi; \
+	done
+	@echo "未導入のものは docs/onboarding.md を参照。多くは 'mise install' で入ります。"
+
 setup: ## ツールチェーン(mise)と依存を一括セットアップ
 	mise install
 	$(MAKE) install

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 質問・相談（はじめての方も歓迎）
+    url: https://github.com/kawafuchieirin/sample-app-bizx/discussions
+    about: バグでも機能提案でもない「使い方の質問」や「相談」はこちらへ。まずは onboarding.md もどうぞ。
