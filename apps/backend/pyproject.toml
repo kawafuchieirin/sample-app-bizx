@@ -1,0 +1,43 @@
+[project]
+name = "bizx-backend"
+version = "0.1.0"
+description = "sample-app-bizx task management API (FastAPI + DynamoDB)"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.34",
+    "pydantic>=2.10",
+    "pydantic-settings>=2.7",
+    "boto3>=1.35",
+    "pyjwt[crypto]>=2.10",
+    "python-ulid>=3.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "httpx>=0.28",
+    "moto[dynamodb]>=5.0",
+    "ruff>=0.9",
+    "mypy>=1.14",
+    "boto3-stubs[dynamodb]>=1.35",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
