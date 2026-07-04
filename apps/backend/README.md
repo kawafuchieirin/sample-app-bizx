@@ -47,3 +47,19 @@ uv run mypy app      # 型チェック（strict）
 
 `/api/v1` 配下。`GET /health` 以外は Bearer トークン必須。ボード / タスクの CRUD は
 [SPEC.md](../../SPEC.md) の「API 設計」を参照。
+
+## デプロイ（AWS Lambda）
+
+`Mangum` で FastAPI を Lambda 化し、API Gateway HTTP API 経由で公開する
+（ハンドラ: `app.lambda_handler.handler`）。コンテナイメージとして ECR に push:
+
+```bash
+docker build -t <ecr_repository_url>:latest .   # context = apps/backend
+docker push <ecr_repository_url>:latest
+aws lambda update-function-code \
+  --function-name <lambda_function_name> \
+  --image-uri <ecr_repository_url>:latest
+```
+
+インフラ(ECR/Lambda/API GW/IAM)は [infra/terraform](../../infra/terraform/README.md) の
+`modules/backend`。CI では `.github/workflows/deploy.yml` が自動化する。
