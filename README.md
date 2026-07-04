@@ -15,6 +15,16 @@
 - デプロイ手順: [docs/deploy.md](docs/deploy.md)
 - Secrets(sops): [docs/sops.md](docs/sops.md)
 
+## はじめての方へ 👋
+
+初めてでも参加できます。まずはこの3つ:
+
+1. [docs/onboarding.md](docs/onboarding.md) — 全体像と用語集（Cognito/Lambda などをやさしく解説）
+2. [CONTRIBUTING.md](CONTRIBUTING.md) — セットアップ〜PR までの手順
+3. `make doctor` → `make setup` → `make dev-frontend` で動かしてみる
+
+Issue の `good first issue` ラベルが最初の一歩におすすめです。
+
 ## 開発（Makefile）
 
 主要タスクは `make` で実行できます（`make help` で一覧）。

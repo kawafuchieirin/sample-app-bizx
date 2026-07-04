@@ -1,0 +1,46 @@
+name: バグ報告
+description: うまく動かない点を報告する
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        報告ありがとうございます！分かる範囲で埋めてください（全部埋まっていなくてOK）。
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 何が起きましたか？
+      description: 起きたことと、期待していたことを教えてください。
+      placeholder: 例) タスクを「完了」に移動すると画面がエラーになる。移動できてほしい。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: どうすると起きますか？
+      placeholder: |
+        1. ログインする
+        2. ボードを開く
+        3. タスクの「→」を押す
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: どのあたり？
+      options:
+        - わからない
+        - フロントエンド（画面）
+        - バックエンド（API）
+        - インフラ / デプロイ
+    validations:
+      required: false
+  - type: textarea
+    id: env
+    attributes:
+      label: 環境・エラーメッセージ
+      description: OS、ブラウザ、`make doctor` の結果、エラー全文などがあれば貼ってください。
+      render: shell
+    validations:
+      required: false

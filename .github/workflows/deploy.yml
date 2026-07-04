@@ -10,6 +10,11 @@ name: Deploy
 on:
   push:
     branches: [main]
+    # アプリ/インフラの変更時のみデプロイ（ドキュメント等では走らせない）
+    paths:
+      - "apps/**"
+      - "infra/**"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 permissions:
