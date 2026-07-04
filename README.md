@@ -15,10 +15,27 @@
 - デプロイ手順: [docs/deploy.md](docs/deploy.md)
 - Secrets(sops): [docs/sops.md](docs/sops.md)
 
-## 開発
+## 開発（Makefile）
+
+主要タスクは `make` で実行できます（`make help` で一覧）。
 
 ```bash
-mise install                              # ツールチェーン
-cd apps/backend  && uv sync && uv run pytest
-cd apps/frontend && pnpm install && pnpm test
+make setup          # ツールチェーン(mise)と依存を一括セットアップ
+make dev-backend    # バックエンド起動 (uvicorn :8000)
+make dev-frontend   # フロント起動 (vite :5173)
+make check          # CI相当の全チェック(lint + typecheck + test)
+make test           # 全テスト
 ```
+
+インフラ/デプロイ:
+
+```bash
+make tf-plan        # terraform plan
+make tf-apply       # terraform apply
+make image-push     # バックエンドimageをECRへpush
+make gh-setup       # terraform outputからGitHub secret/varsを設定
+make deploy         # GitHub ActionsのDeployを実行
+```
+
+> terraform/デプロイ系は `AWS_PROFILE`(既定 `workload-account`)を使用。
+> 上書き例: `make tf-plan AWS_PROFILE=other`
