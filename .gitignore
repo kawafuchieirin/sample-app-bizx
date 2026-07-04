@@ -1,0 +1,56 @@
+# --- Python / backend ---
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# --- Node / frontend ---
+node_modules/
+.pnpm-store/
+dist/
+.vite/
+*.local
+
+# --- Terraform / infra ---
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!*.tfvars.example
+.terraform.lock.hcl
+
+# --- Runtime volume (local dev data) ---
+volume/cache/
+volume/logs/
+volume/tmp/
+volume/lib/
+
+# --- Env / secrets ---
+.env
+.env.*
+!.env.example
+*.dec
+*.decrypted
+*.plaintext
+age-key.txt
+keys.txt
+
+# sops-managed secret files are safe to commit after encryption.
+!.env.sops
+!.env.sops.example
+!*.env.sops
+!*.sops.env
+!*.sops.yaml
+!*.sops.yml
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
