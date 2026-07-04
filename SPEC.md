@@ -185,12 +185,17 @@
 
 ---
 
-## 11. 要確認事項（実装前に確定させる）
+## 11. 要確認事項
 
+### 確定済み
+- **認証（ログイン方式）**: ✅ Cognito **Hosted UI**（OAuth2 Authorization Code + PKCE）
+- **ID 方式**: ✅ ULID
+- **環境**: ✅ dev / prod の 2 環境
+- **Cognito 構築**: ✅ Terraform `modules/auth`（Hosted UI・SPA クライアント）を M2 で前倒し実装
+
+### 未確定（M3 デプロイ時に確定）
 1. **バックエンド実行基盤**: Lambda（サーバーレス）か ECS/Fargate か → コスト/コールドスタートで判断
 2. **API 公開方式**: API Gateway か ALB か
-3. **Cognito のホスト UI を使うか、独自ログイン画面か**
-4. **ボードの初期体験**: サインアップ時にデフォルトボードを自動作成するか
-5. **ID 方式**: ULID / UUIDv4 のどちらを採用するか
-6. **環境**: dev / prod の 2 環境で進めるか
+3. **ボードの初期体験**: サインアップ時にデフォルトボードを自動作成するか
+4. **Terraform リモートステート**: `bootstrap`（S3 + DynamoDB ロック）の構築
 ```
