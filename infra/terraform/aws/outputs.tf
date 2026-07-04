@@ -20,6 +20,12 @@ output "cognito_hosted_ui_domain" {
   value       = module.auth.hosted_ui_domain
 }
 
+# --- General -------------------------------------------------------------
+
+output "region" {
+  value = var.region
+}
+
 # --- Data ----------------------------------------------------------------
 
 output "table_name" {
