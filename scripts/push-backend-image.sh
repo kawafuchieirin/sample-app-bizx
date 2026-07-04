@@ -18,7 +18,9 @@ command -v aws >/dev/null || { echo "aws CLI is required"; exit 1; }
 command -v docker >/dev/null || { echo "docker is required"; exit 1; }
 
 ECR_URL="$(terraform -chdir="$TF_DIR" output -raw ecr_repository_url)"
-REGION="$(terraform -chdir="$TF_DIR" output -raw region)"
+# region output may not exist yet during the first (ECR-only) apply; fall back
+# to the configured AWS region.
+REGION="$(terraform -chdir="$TF_DIR" output -raw region 2>/dev/null || aws configure get region || echo ap-northeast-1)"
 REGISTRY="${ECR_URL%%/*}"
 
 echo "Logging in to ECR ($REGISTRY) ..."
