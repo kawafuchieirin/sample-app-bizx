@@ -1,0 +1,8 @@
+# Replace the placeholder age recipient before creating encrypted files:
+#   age-keygen -o ~/.config/sops/age/keys.txt
+#   age-keygen -y ~/.config/sops/age/keys.txt
+#
+# Then put the printed public recipient in `age` below.
+creation_rules:
+  - path_regex: apps/backend/\.env\.sops$
+    age: age1replace_with_project_or_team_public_recipient
