@@ -1,0 +1,9 @@
+# Copy to terraform.tfvars and adjust. terraform.tfvars is gitignored.
+region      = "ap-northeast-1"
+environment = "dev"
+
+# Must be globally unique across all AWS Cognito domains.
+cognito_domain_prefix = "bizx-dev-CHANGEME"
+
+callback_urls = ["http://localhost:5173/"]
+logout_urls   = ["http://localhost:5173/"]
