@@ -5,5 +5,12 @@ environment = "dev"
 # Must be globally unique across all AWS Cognito domains.
 cognito_domain_prefix = "bizx-dev-CHANGEME"
 
-callback_urls = ["http://localhost:5173/"]
-logout_urls   = ["http://localhost:5173/"]
+# GitHub repo for the OIDC deploy role.
+github_owner = "kawafuchieirin"
+github_repo  = "sample-app-bizx"
+
+# Set false if the GitHub OIDC provider already exists in the account.
+create_oidc_provider = true
+
+# ECR image tag deployed to Lambda (CI pushes before apply).
+backend_image_tag = "latest"

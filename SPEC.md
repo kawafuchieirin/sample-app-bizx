@@ -180,8 +180,12 @@
 - [ ] Vitest テスト
 
 ### M3: インフラ / CI-CD
-- [ ] Terraform: data(DynamoDB) / backend / frontend / github-oidc
-- [ ] GitHub Actions（lint → test → build → deploy、OIDC）
+- [x] Terraform: data(DynamoDB) / backend(Lambda+API GW) / frontend(S3+CloudFront) / github-oidc / auth(Cognito)
+- [x] バックエンド Lambda 化（Mangum + コンテナイメージ / Dockerfile）
+- [x] GitHub Actions CI（backend/frontend/terraform の lint・test・build・validate）
+- [x] GitHub Actions Deploy（OIDC → ECR push → Lambda 更新 → S3 sync → CloudFront invalidation）
+- [x] Terraform リモートステート（bootstrap: S3 + DynamoDB ロック）
+- [ ] 実 AWS への `terraform apply`（有効な認証情報が必要 / 未実施）
 
 ---
 
@@ -191,11 +195,13 @@
 - **認証（ログイン方式）**: ✅ Cognito **Hosted UI**（OAuth2 Authorization Code + PKCE）
 - **ID 方式**: ✅ ULID
 - **環境**: ✅ dev / prod の 2 環境
-- **Cognito 構築**: ✅ Terraform `modules/auth`（Hosted UI・SPA クライアント）を M2 で前倒し実装
+- **Cognito 構築**: ✅ Terraform `modules/auth`（Hosted UI・SPA クライアント）
+- **バックエンド実行基盤**: ✅ **AWS Lambda**（Mangum + コンテナイメージ）
+- **API 公開方式**: ✅ **API Gateway HTTP API**（`$default` ルートで Lambda プロキシ）
+- **Terraform リモートステート**: ✅ `bootstrap`（S3 + DynamoDB ロック）を用意
 
-### 未確定（M3 デプロイ時に確定）
-1. **バックエンド実行基盤**: Lambda（サーバーレス）か ECS/Fargate か → コスト/コールドスタートで判断
-2. **API 公開方式**: API Gateway か ALB か
-3. **ボードの初期体験**: サインアップ時にデフォルトボードを自動作成するか
-4. **Terraform リモートステート**: `bootstrap`（S3 + DynamoDB ロック）の構築
+### 未確定 / 残タスク
+1. **ボードの初期体験**: サインアップ時にデフォルトボードを自動作成するか
+2. **実 AWS へのデプロイ**: 有効な AWS 認証情報で `terraform apply` → CI 用の GitHub secret/vars 設定
+3. **カスタムドメイン / ACM 証明書**: 本番用（現状は CloudFront 既定ドメイン）
 ```

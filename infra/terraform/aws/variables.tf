@@ -15,14 +15,25 @@ variable "cognito_domain_prefix" {
   type        = string
 }
 
-variable "callback_urls" {
-  description = "Allowed OAuth callback URLs."
-  type        = list(string)
-  default     = ["http://localhost:5173/"]
+variable "backend_image_tag" {
+  description = "ECR image tag for the backend Lambda. CI pushes this before apply."
+  type        = string
+  default     = "latest"
 }
 
-variable "logout_urls" {
-  description = "Allowed sign-out redirect URLs."
-  type        = list(string)
-  default     = ["http://localhost:5173/"]
+variable "github_owner" {
+  description = "GitHub org/user that owns the repo (for OIDC deploy role)."
+  type        = string
+}
+
+variable "github_repo" {
+  description = "Repository name (for OIDC deploy role)."
+  type        = string
+  default     = "sample-app-bizx"
+}
+
+variable "create_oidc_provider" {
+  description = "Create the GitHub OIDC provider (false if it already exists in the account)."
+  type        = bool
+  default     = true
 }
